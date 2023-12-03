@@ -10,10 +10,10 @@
         "laravel/framework": "^10.10",
         "laravel/horizon": "^5.21",
         "laravel/sanctum": "^3.3",
-        "laravel/tinker": "^2.8"
+        "laravel/tinker": "^2.8",
+        "nunomaduro/pail": "^1.0"
     },
     "require-dev": {
-        "nunomaduro/pail": "^1.0",
         "fakerphp/faker": "^1.9.1",
         "laradumps/laradumps": "^2.2",
         "laravel/pint": "^1.13",
