@@ -1,14 +1,16 @@
 ### Roadmap
 
-- [x] Custom README.md
+- [X] Custom README.md
 - [x] Prepare Sail
-- [ ] Install and Configure 
-  - [X] Laravel Pint
-  - [X] LaraStan
-  - [X] Laravel Telescope
-  - [X] Laravel Horizon
-  - [X] Pest
-  - [X] Husky: Pre-Commit
-  - [X] Laravel Sanctum
-  - [ ] LaraDumps
+- [X] Install and Configure 
+  - [X] Laravel Pint (pattern format code)
+  - [X] LaraStan (best practices in code)
+  - [X] Laravel Telescope (monitor Laravel App)
+  - [X] Laravel Horizon (execute jobs in background)
+  - [X] Pest (test)
+  - [X] Husky: Pre-Commit (execute Pest, LaraStan and Pint)
+  - [X] Laravel Sanctum (authentication)
+  - [X] LaraDumps (debug)
+  - [X] Laravel Pail (logs monitor)
+- [X] Create Arch test: no debugging
 - [ ] Prepare GitHub Actions, for deploy
