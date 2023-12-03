@@ -56,6 +56,10 @@ class $CLASS$ extends ServiceProvider
      */
     public function registerTranslations(): void
     {
+        if (!is_dir(module_path($this->moduleName, 'lang'))) {
+            return;
+        }
+
         $langPath = resource_path('lang/modules/'.$this->moduleNameLower);
 
         if (is_dir($langPath)) {
@@ -81,6 +85,10 @@ class $CLASS$ extends ServiceProvider
      */
     public function registerViews(): void
     {
+        if (!is_dir(module_path($this->moduleName, 'resources/views'))) {
+            return;
+        }
+
         $viewPath = resource_path('views/modules/'.$this->moduleNameLower);
         $sourcePath = module_path($this->moduleName, '$PATH_VIEWS$');
 

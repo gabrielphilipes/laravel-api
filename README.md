@@ -13,4 +13,6 @@
   - [X] LaraDumps (debug)
   - [X] Laravel Pail (logs monitor)
 - [X] Create Arch test: no debugging
+- [X] Laravel Modules
+  - [X] Configure: configs, stubs, etc
 - [ ] Prepare GitHub Actions, for deploy
