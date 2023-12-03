@@ -1,7 +1,7 @@
 ### Roadmap
 
 - [x] Custom README.md
-- [ ] Prepare Sail
+- [x] Prepare Sail
 - [ ] Install and Configure 
   - [ ] Laravel Pint
   - [ ] LaraStan
