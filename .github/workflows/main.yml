@@ -1,0 +1,88 @@
+name: 🚀🚀🚀 Deploy PRODUCTION
+
+on:
+  push:
+    branches: [ "CUSTOM_BRANCH" ]
+    # CUSTOM BRANCH
+
+jobs:
+  create-deployment-artifacts:
+    name: 🏁 Create deployment artifacts
+    runs-on: ubuntu-latest
+    outputs:
+      deployment-matrix: ${{ steps.export-deployment-matrix.outputs.deployment-matrix }}
+
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2
+
+      - name: 🗂 Create deployment file
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+        run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules * .env*
+
+      - name: 🆙 Store app for distribution
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-build
+          path: ${{ github.sha }}.tar.gz
+
+      - name: 📑 Export deployment matrix
+        id: export-deployment-matrix
+        run: |
+          sudo apt-get install -y jq
+          JSON="$(jq '.main' ./deployment-config.json)"
+          JSON="${JSON//'%'/'%25'}"
+          JSON="${JSON//$'\n'/'%0A'}"
+          JSON="${JSON//$'\r'/'%0D'}"
+          echo "::set-output name=deployment-matrix::$JSON"
+
+
+  prepare-release-on-servers:
+    name: "${{ matrix.server.name }}: Prepare release"
+    runs-on: ubuntu-latest
+    needs: create-deployment-artifacts
+    strategy:
+      matrix:
+        server: ${{ fromJson(needs.create-deployment-artifacts.outputs.deployment-matrix) }}
+
+    steps:
+      - name: 🌎 Connecting serve
+        uses: actions/download-artifact@v2
+        with:
+          name: app-build
+
+      - name: 🔽 Pull file
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ matrix.server.ip }}
+          username: ${{ matrix.server.username }}
+          password: ${{ secrets.DEPLOY_PASS }}
+          port: ${{ matrix.server.port }}
+          source: ${{ github.sha }}.tar.gz
+          target: ${{ matrix.server.path }}
+
+      - name: 🐞 Execute jobs
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ matrix.server.ip }}
+          username: ${{ matrix.server.username }}
+          password: ${{ secrets.DEPLOY_PASS }}
+          port: ${{ matrix.server.port }}
+          script: |
+            cd ${{ matrix.server.path }}
+            tar -xvf ${{ github.sha }}.tar.gz
+            mv docker-compose.prod.yml docker-compose.yml
+            mv docker/8.3.prod/nginx.conf nginx.conf
+            docker-compose up -d --build
+            docker exec -w /var/www/html/ api-sail composer clear-cache
+            docker exec -w /var/www/html/ api-sail composer update --no-dev --no-interaction --prefer-dist
+            docker exec -w /var/www/html/ api-sail php artisan optimize:clear
+            docker exec -w /var/www/html/ api-sail php artisan storage:link
+            chown -R www:www $(ls | awk '{if($1 != ".user.ini"){ print $1 }}')
+            rm -rf ${{ github.sha }}.tar.gz deployment-config.json *.code-workspace docker-compose.prod.yml
+            docker exec -w /var/www/html/ api-sail supervisorctl start horizon
+            echo "Finish 😃"
+            exit 0
+
+
