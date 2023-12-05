@@ -35,16 +35,17 @@ Obs.: If you want to use another port, you can change it in the `.env >> APP_POR
 - [X] Custom README.md
 - [x] Prepare Sail
 - [X] Install and Configure 
-  - [X] Laravel Pint (pattern format code)
-  - [X] LaraStan (best practices in code)
-  - [X] Laravel Telescope (monitor Laravel App)
-  - [X] Laravel Horizon (execute jobs in background)
-  - [X] Pest (test)
-  - [X] Husky: Pre-Commit (execute Pest, LaraStan and Pint)
-  - [X] Laravel Sanctum (authentication)
-  - [X] LaraDumps (debug)
-  - [X] Laravel Pail (logs monitor)
+  - [X] [Laravel Pint](https://laravel.com/docs/10.x/pint) (pattern format code)
+  - [X] [LaraStan](https://github.com/larastan/larastan) (best practices in code)
+  - [X] [Laravel Telescope](https://laravel.com/docs/10.x/telescope) (monitor Laravel App)
+  - [X] [Laravel Horizon](https://laravel.com/docs/10.x/horizon) (execute jobs in background)
+  - [X] [Pest](https://pestphp.com/) (test)
+  - [X] [Husky](https://typicode.github.io/husky/getting-started.html): Pre-Commit (execute Pest, LaraStan and Pint)
+  - [X] [Laravel Sanctum](https://laravel.com/docs/10.x/sanctum) (authentication)
+  - [X] [LaraDumps](https://laradumps.dev/) (debug)
+  - [X] [Laravel Pail](https://github.com/laravel/pail) (logs monitor)
+  - [X] [Laravel Auditing](https://laravel-auditing.com/) (audit models)
 - [X] Create Arch test: no debugging
-- [X] Laravel Modules
+- [X] [Laravel Modules](https://nwidart.com/laravel-modules/v6/introduction)
   - [X] Configure: configs, stubs, etc
 - [ ] Prepare GitHub Actions, for deploy
