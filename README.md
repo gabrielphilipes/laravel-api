@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://laravel.com" target="_blank">
-        <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400">
+        <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="">
     </a>
 </p>
 
@@ -30,6 +30,10 @@ during development. I suggest creating an alias for it in your terminal.
 
 Obs.: If you want to use another port, you can change it in the `.env >> APP_PORT, FORWARD_DB_PORT or FORWARD_REDIS_PORT` file.
 
+### Docs
+- [Routes](docs/1-routes.md)
+- [Models](docs/2-models.md)
+
 ### Roadmap (WIP)
 
 - [X] Custom README.md
@@ -39,8 +43,8 @@ Obs.: If you want to use another port, you can change it in the `.env >> APP_POR
   - [X] [LaraStan](https://github.com/larastan/larastan) (best practices in code)
   - [X] [Laravel Telescope](https://laravel.com/docs/10.x/telescope) (monitor Laravel App)
   - [X] [Laravel Horizon](https://laravel.com/docs/10.x/horizon) (execute jobs in background)
-  - [X] [Pest](https://pestphp.com/) (test)
-  - [X] [Husky](https://typicode.github.io/husky/getting-started.html): Pre-Commit (execute Pest, LaraStan and Pint)
+  - [X] [Pest](https://pestphp.com/) (tests)
+  - [X] [Husky](https://typicode.github.io/husky/getting-started.html): pre-commit and pre-push
   - [X] [Laravel Sanctum](https://laravel.com/docs/10.x/sanctum) (authentication)
   - [X] [LaraDumps](https://laradumps.dev/) (debug)
   - [X] [Laravel Pail](https://github.com/laravel/pail) (logs monitor)
@@ -48,4 +52,6 @@ Obs.: If you want to use another port, you can change it in the `.env >> APP_POR
 - [X] Create Arch test: no debugging
 - [X] [Laravel Modules](https://nwidart.com/laravel-modules/v6/introduction)
   - [X] Configure: configs, stubs, etc
+  - [ ] Create example CRUD module
+- [X] Create Arch test: no debugging
 - [ ] Prepare GitHub Actions, for deploy
