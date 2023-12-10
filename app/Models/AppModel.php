@@ -32,16 +32,16 @@ class AppModel extends Model
         $this->casts = array_merge($this->casts, $casts);
 
         if (
-            !empty($this->timezoneCasts) &&
+            count($this->timezoneCasts) > 0 &&
             $this->useTimezoneCasts
         ) {
+            $mergeTimezoneCast = [];
+
             foreach ($this->timezoneCasts as $timezoneCast) {
                 $mergeTimezoneCast[$timezoneCast] = TimezoneCast::class;
             }
 
-            if (!empty($mergeTimezoneCast)) {
-                $this->casts = array_merge($mergeTimezoneCast, $this->casts);
-            }
+            $this->casts = array_merge($mergeTimezoneCast, $this->casts);
         }
 
         return $this;

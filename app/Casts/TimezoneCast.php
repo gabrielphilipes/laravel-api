@@ -38,7 +38,7 @@ class TimezoneCast implements CastsAttributes
      */
     private function setTimezone(mixed $value, bool $isSet): mixed
     {
-        /** @var User $user */
+        /** @var User|null $user */
         $user = auth()->user();
 
         if (empty($user)) {
