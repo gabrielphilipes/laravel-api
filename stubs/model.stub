@@ -11,4 +11,12 @@ class {{ class }} extends AppModel implements Auditable
 {
     use HasFactory;
     use AuditableTrait;
+
+    /**
+     * Convert, by default, only the `created_at` and `updated_at` fields
+     * in timezone user.
+     *
+     * Consult `AppModel` for more information
+     */
+    protected bool $useTimezoneCasts = true;
 }

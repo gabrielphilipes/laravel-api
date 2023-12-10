@@ -32,9 +32,16 @@ Obs.: If you want to use another port, you can change it in the `.env >> APP_POR
 
 ### Docs
 - [Routes](docs/1-routes.md)
+  - Examples
+  - Resources
+  - Middlewares **[WIP]**
 - [Models](docs/2-models.md)
+  - Structure
+  - Relationships
+  - Scopes
+  - Casts **[WIP]**
 
-### Roadmap (WIP)
+### Roadmap [WIP]
 
 - [X] Custom README.md
 - [x] Prepare Sail
