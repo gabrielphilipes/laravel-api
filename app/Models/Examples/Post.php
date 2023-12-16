@@ -1,18 +1,24 @@
 <?php
 
-namespace {{ namespace }};
+namespace App\Models\Examples;
 
 use App\Models\AppModel;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class {{ class }} extends AppModel implements Auditable
+class Post extends AppModel implements Auditable
 {
     use HasFactory;
-    // use SoftDeletes;
+    use SoftDeletes;
     use AuditableTrait;
+
+    /** @var string */
+    protected $table = 'example_post';
+
+    /** @var string  */
+    protected $connection = 'sqlite';
 
     /**
      * Convert, by default, only the `created_at` and `updated_at` fields
@@ -31,5 +37,9 @@ class {{ class }} extends AppModel implements Auditable
      *
      * @var string[]
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'title',
+        'content',
+        'slug',
+    ];
 }
