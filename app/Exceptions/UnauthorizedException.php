@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Exceptions\Examples;
+namespace App\Exceptions;
 
 use Exception;
 
-class PostSlugInUsedException extends Exception
+class UnauthorizedException extends Exception
 {
     /** @var int */
-    protected $code = 400;
+    protected $code = 401;
 
     /** @var string */
-    protected $message = 'Slug is already in use.';
+    protected $message = 'Unauthorized.';
 
-    public function render(): \Illuminate\Http\JsonResponse
+    public function render()
     {
         return response()->json([
             'error'   => class_basename($this),

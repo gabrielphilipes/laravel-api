@@ -7,10 +7,14 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
 {
+    public static $wrap = 'post';
+
     /**
-     * Transform the resource into an array.
+     * Converts the object to an array representation.
      *
-     * @return array<string, mixed>
+     * @param Request $request The request object to be used in the conversion.
+     *
+     * @return array The array representation of the object.
      */
     public function toArray(Request $request): array
     {

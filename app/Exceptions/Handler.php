@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
@@ -46,7 +47,11 @@ class Handler extends ExceptionHandler
             case $e instanceof ModelNotFoundException:
                 throw new NotFoundException('Register not found. Please, check the data and try again.');
 
+            case $e instanceof AuthenticationException:
+                throw new UnauthorizedException();
+
             default:
+                //                dd($e);
                 return parent::render($request, $e);
         }
     }

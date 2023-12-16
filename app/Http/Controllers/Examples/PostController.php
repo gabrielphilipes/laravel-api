@@ -51,9 +51,6 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param PostUpdateRequest $request
-     * @param Post $post
-     * @return PostResource
      * @throws PostSlugInUsedException
      */
     public function update(PostUpdateRequest $request, Post $post): PostResource
