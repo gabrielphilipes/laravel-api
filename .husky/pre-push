@@ -2,7 +2,7 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 # Run PHPStan to analyze code
-./vendor/bin/phpstan
+./vendor/bin/phpstan --memory-limit=1G
 if [ $? -ne 0 ]; then
     echo "PHPStan pegou algo de errado! Ajeite para continuar... 😉";
     exit 1;
