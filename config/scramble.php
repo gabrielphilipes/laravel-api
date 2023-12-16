@@ -1,5 +1,6 @@
 <?php
 
+use App\Scramble\GenericExceptionsExtension;
 use Dedoc\Scramble\Http\Middleware\RestrictedDocsAccess;
 
 return [
@@ -68,5 +69,7 @@ return [
         RestrictedDocsAccess::class,
     ],
 
-    'extensions' => [],
+    'extensions' => [
+        GenericExceptionsExtension::class,
+    ],
 ];
