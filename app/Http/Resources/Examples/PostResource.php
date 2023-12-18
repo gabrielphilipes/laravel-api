@@ -7,8 +7,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
 {
-    public static $wrap = 'post';
-
     /**
      * Converts the object to an array representation.
      *
@@ -19,9 +17,12 @@ class PostResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'      => (int)$this->id,
-            'title'   => $this->title,
-            'slug'    => $this->slug,
+            'id'    => (int)$this->id,
+            'title' => $this->title,
+            /**
+             * @var string|null Camel case title representation
+             */
+            'slug'    => $this->slug ?? null,
             'content' => $this->content,
         ];
     }

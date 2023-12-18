@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -42,16 +43,18 @@ class Handler extends ExceptionHandler
                         fn ($item) => implode('; ', $item),
                         $e->validator->errors()->messages()
                     ),
-                ], 400);
+                ], 422);
 
             case $e instanceof ModelNotFoundException:
                 throw new NotFoundException('Register not found. Please, check the data and try again.');
 
             case $e instanceof AuthenticationException:
+                throw new AuthenticatedException();
+
+            case $e instanceof AuthorizationException:
                 throw new UnauthorizedException();
 
             default:
-                //                dd($e);
                 return parent::render($request, $e);
         }
     }

@@ -6,13 +6,11 @@ use Exception;
 
 class UnauthorizedException extends Exception
 {
-    /** @var int */
-    protected $code = 401;
+    protected $code = 403;
 
-    /** @var string */
-    protected $message = 'Unauthorized.';
+    protected $message = 'Unauthorized! You are not allowed to perform this action.';
 
-    public function render()
+    public function render(): \Illuminate\Http\JsonResponse
     {
         return response()->json([
             'error'   => class_basename($this),
