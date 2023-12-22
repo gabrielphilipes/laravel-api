@@ -17,8 +17,6 @@ class AuthorizedExceptionExtension extends ExceptionToResponseExtension
     {
         $this->exceptionNamespace = '\\' . $type->toString();
 
-        ds($this->exceptionNamespace);
-
         return $type instanceof ObjectType
             && (
                 $type->isInstanceOf(UnauthorizedException::class) ||

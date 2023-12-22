@@ -12,8 +12,6 @@ class ValidationExceptionExtension extends ExceptionToResponseExtension
 {
     public function shouldHandle(Type $type): bool
     {
-        $this->exceptionNamespace = '\\' . $type->toString();
-
         return $type instanceof ObjectType &&
             $type->isInstanceOf(ValidationException::class);
     }

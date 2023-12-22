@@ -12,12 +12,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class NotFoundExceptionExtension extends ExceptionToResponseExtension
 {
-    private string $exceptionNamespace;
-
     public function shouldHandle(Type $type): bool
     {
-        $this->exceptionNamespace = '\\' . $type->toString();
-
         return $type instanceof ObjectType
             && (
                 $type->isInstanceOf(RecordsNotFoundException::class) ||

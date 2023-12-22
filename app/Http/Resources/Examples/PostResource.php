@@ -2,9 +2,11 @@
 
 namespace App\Http\Resources\Examples;
 
+use AllowDynamicProperties;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+#[AllowDynamicProperties]
 class PostResource extends JsonResource
 {
     /**
