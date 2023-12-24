@@ -21,11 +21,13 @@ class PostResource extends JsonResource
         return [
             'id'    => (int)$this->id,
             'title' => $this->title,
-            /**
-             * @var string|null Camel case title representation
-             */
+            /** @var string|null Camel case title representation */
             'slug'    => $this->slug ?? null,
             'content' => $this->content,
+            $this->mergeWhen(
+                $request->input('withComments', false) === 'true',
+                ['comments' => PostCommentResource::collection($this->comments)]
+            ),
         ];
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Examples\{PostCreateRequest, PostUpdateRequest};
 use App\Http\Resources\Examples\PostResource;
 use App\Models\Examples\Post;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Str;
 
@@ -15,9 +16,19 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): AnonymousResourceCollection
+    public function index(Request $request): AnonymousResourceCollection
     {
-        return PostResource::collection(Post::all());
+        $input = $request->validate([
+            'withComments' => 'nullable|in:true',
+        ]);
+
+        $posts = new Post();
+
+        if (!empty($input['withComments'])) {
+            $posts = $posts->with('comments');
+        }
+
+        return PostResource::collection($posts->get());
     }
 
     /**
@@ -43,8 +54,10 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post): PostResource
+    public function show(Post $post, Request $request): PostResource
     {
+        $request->validate(['withComments' => 'nullable|in:true']);
+
         return PostResource::make($post);
     }
 
