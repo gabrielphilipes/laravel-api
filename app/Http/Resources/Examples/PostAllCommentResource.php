@@ -17,7 +17,7 @@ class PostAllCommentResource extends JsonResource
         return [
             'id' => (int)$this->id,
             /** @var string Comment complete, no limit of characters. */
-            'comment' => $this->comment, 255,
+            'comment' => $this->comment,
         ];
     }
 }
