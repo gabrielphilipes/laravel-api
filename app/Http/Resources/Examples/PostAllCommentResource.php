@@ -4,9 +4,8 @@ namespace App\Http\Resources\Examples;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Str;
 
-class PostCommentResource extends JsonResource
+class PostAllCommentResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +16,8 @@ class PostCommentResource extends JsonResource
     {
         return [
             'id' => (int)$this->id,
-            /** @var string Comment length is limited to 255 characters. */
-            'comment' => Str::limit($this->comment, 255),
+            /** @var string Comment complete, no limit of characters. */
+            'comment' => $this->comment, 255,
         ];
     }
 }
