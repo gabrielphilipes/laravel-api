@@ -6,7 +6,7 @@ use App\Exceptions\Examples\PostSlugInUsedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Examples\{PostCreateRequest, PostUpdateRequest};
 use App\Http\Resources\Examples\PostResource;
-use App\Models\Examples\Post;
+use App\Models\Examples\ExamplePost;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Str;
@@ -22,7 +22,7 @@ class PostController extends Controller
             'withComments' => 'nullable|in:true',
         ]);
 
-        $posts = new Post();
+        $posts = new ExamplePost();
 
         if (!empty($input['withComments'])) {
             $posts = $posts->with('comments');
@@ -40,13 +40,13 @@ class PostController extends Controller
 
         $input['slug'] = Str::slug($input['title']);
 
-        $checkExistsSlug = Post::where('slug', $input['slug'])->first();
+        $checkExistsSlug = ExamplePost::where('slug', $input['slug'])->first();
 
         if ($checkExistsSlug) {
             $input['slug'] = $input['slug'] . '-' . Str::random(2);
         }
 
-        $post = Post::create($input);
+        $post = ExamplePost::create($input);
 
         return PostResource::make($post);
     }
@@ -54,7 +54,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post, Request $request): PostResource
+    public function show(ExamplePost $post, Request $request): PostResource
     {
         $request->validate(['withComments' => 'nullable|in:true']);
 
@@ -66,13 +66,13 @@ class PostController extends Controller
      *
      * @throws PostSlugInUsedException
      */
-    public function update(PostUpdateRequest $request, Post $post): PostResource
+    public function update(PostUpdateRequest $request, ExamplePost $post): PostResource
     {
         $input = $request->validated();
 
         $input['slug'] = $input['slug'] ?? Str::slug($input['title']);
 
-        $checkExistsSlug = Post::where('slug', $input['slug'])->first();
+        $checkExistsSlug = ExamplePost::where('slug', $input['slug'])->first();
 
         if ($checkExistsSlug && $checkExistsSlug->id !== $post->id) {
             throw new PostSlugInUsedException();
@@ -86,7 +86,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post): void
+    public function destroy(ExamplePost $post): void
     {
         $post->delete();
     }

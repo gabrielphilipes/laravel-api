@@ -17,7 +17,7 @@ class PostCommentResource extends JsonResource
     {
         return [
             'id' => (int)$this->id,
-            /** @var string Comment length is limited to 255 characters. */
+            /** @var string ExampleComment length is limited to 255 characters. */
             'comment' => Str::limit($this->comment, 255),
         ];
     }

@@ -6,7 +6,7 @@ use App\Exceptions\NotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Examples\CommentManagerRequest;
 use App\Http\Resources\Examples\{PostAllCommentResource, PostCommentResource};
-use App\Models\Examples\{Comment, Post};
+use App\Models\Examples\{ExampleComment, ExamplePost};
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
@@ -15,7 +15,7 @@ class PostCommentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Post $post): AnonymousResourceCollection
+    public function index(ExamplePost $post): AnonymousResourceCollection
     {
         return PostCommentResource::collection($post->comments);
     }
@@ -23,7 +23,7 @@ class PostCommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Post $post, CommentManagerRequest $request): PostAllCommentResource
+    public function store(ExamplePost $post, CommentManagerRequest $request): PostAllCommentResource
     {
         $input            = $request->validated();
         $input['post_id'] = $post->id;
@@ -36,10 +36,10 @@ class PostCommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post, Comment $comment): PostAllCommentResource
+    public function show(ExamplePost $post, ExampleComment $comment): PostAllCommentResource
     {
         if ($post->id !== $comment->post_id) {
-            throw new NotFoundException('Comment not found in this post [ID ' . $post->id . ']');
+            throw new NotFoundException('ExampleComment not found in this post [ID ' . $post->id . ']');
         }
 
         return PostAllCommentResource::make($comment);
@@ -48,10 +48,10 @@ class PostCommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Post $post, Comment $comment, CommentManagerRequest $request): PostAllCommentResource
+    public function update(ExamplePost $post, ExampleComment $comment, CommentManagerRequest $request): PostAllCommentResource
     {
         if ($post->id !== $comment->post_id) {
-            throw new NotFoundException('Comment not found in this post [ID ' . $post->id . ']');
+            throw new NotFoundException('ExampleComment not found in this post [ID ' . $post->id . ']');
         }
 
         $input = $request->validated();
@@ -63,10 +63,10 @@ class PostCommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post, Comment $comment): Response
+    public function destroy(ExamplePost $post, ExampleComment $comment): Response
     {
         if ($post->id !== $comment->post_id) {
-            throw new NotFoundException('Comment not found in this post [ID ' . $post->id . ']');
+            throw new NotFoundException('ExampleComment not found in this post [ID ' . $post->id . ']');
         }
 
         $comment->delete();

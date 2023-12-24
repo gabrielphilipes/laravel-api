@@ -4,18 +4,19 @@ namespace App\Models\Examples;
 
 use App\Models\AppModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class Comment extends AppModel implements Auditable
+class ExamplePost extends AppModel implements Auditable
 {
     use HasFactory;
     use SoftDeletes;
     use AuditableTrait;
 
     /** @var string */
-    protected $table = 'example_comments';
+    protected $table = 'example_post';
 
     /** @var string */
     protected $connection = 'sqlite';
@@ -38,6 +39,13 @@ class Comment extends AppModel implements Auditable
      * @var string[]
      */
     protected $fillable = [
-        'comment',
+        'title',
+        'content',
+        'slug',
     ];
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(ExampleComment::class, 'post_id', 'id');
+    }
 }
