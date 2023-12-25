@@ -29,7 +29,7 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
-        });
+        })->stop();
     }
 
     public function render($request, Throwable $e)
